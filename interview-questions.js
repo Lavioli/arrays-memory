@@ -25,7 +25,36 @@ function lessThanFive(array) {
 
 lessThanFive([1,2,3,4,5,6]);
 
+
+
+
+
 // Imagine you have two arrays which have already been sorted. Write an algorithm to merge the two arrays into a single array, which should also be sorted. For example, if your input arrays were [1, 3, 6, 8, 11] and [2, 3, 5, 8, 9, 10], your output array should be [1, 2, 3, 3, 5, 6, 8, 8, 9, 10, 11].
+
+function compare(a, b) {
+	return a - b;
+}
+
+function mergeSort(arrayA, arrayB) {
+	var newArr =  [];
+
+	for(var i = 0; i < arrayA.length; i++) {
+		newArr.push(arrayA[i]);
+	}
+	for(var j = 0; j < arrayB.length; j++) {
+		newArr.push(arrayB[j]);
+	}
+	return newArr.sort(compare);
+	
+}
+
+mergeSort([1, 3, 6, 8, 11], [2, 3, 5, 8, 9, 10])
+
+
+
+
+//------------------------------------------------------------------------------
+
 
 function sortMerge (array1, array2) {
 	var newArr = [],
@@ -92,6 +121,12 @@ i = 2;
 newArr = [1,2,3,3]
 j = 2
 
+
+
+
+
+
+
 // Given an array of numbers, write an algorithm to find out the products of every number, except the one at that index. For example, if the input was [1, 3, 9, 4], the output should be [108, 36, 12, 27] (i.e. [3*9*4, 1*9*4, 1*3*4, 1*3*9]).
 
 function getProduct(array, index) {
@@ -125,3 +160,46 @@ function getOtherProduct(arr) {
 }
 
 getOtherProduct([1,3,9,4]);
+
+//------------------------------------------------------------------------------
+
+function getProduct(arr) {
+	var product = 1;
+	for(var j = 0; j<arr.length; j++) {
+		product *= arr[j];
+	}
+	return product;
+}
+
+
+function getOtherProduct(arr) {
+	var newArr=[];
+	for(var i = 0; i < arr.length; i++) {
+		newArr[i] = getProduct(arr.slice(i+1).concat(arr.slice(0, i)));
+	}
+	return newArr;
+}
+
+getOtherProduct([2,3,4,5])
+
+
+//------------------------------------------------------------------------------
+
+
+function obtainProduct(array) {
+	if(array.length === 0) {
+		return 1;
+	}
+	return array[0] * obtainProduct(array.slice(1));
+}
+
+
+function getOtherProduct(arr) {
+	var newArr=[];
+	for(var i = 0; i < arr.length; i++) {
+		newArr[i] = obtainProduct(arr.slice(i+1).concat(arr.slice(0, i)));
+	}
+	return newArr;
+}
+
+getOtherProduct([2,3,4,5])
